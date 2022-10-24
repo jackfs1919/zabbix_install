@@ -1,4 +1,5 @@
 ---
+
 - name: Update apt repo and cache on all Debian/Ubuntu boxes
   apt: 
     update_cache: yes 
@@ -9,5 +10,25 @@
   apt: 
    upgrade: dist 
    force_apt_get: yes
+
+- name: Install soft
+  apt:
+    name: "{{ item }}"
+  loop:
+    - nano
+    - curl 
+    - bind9-utils 
+    - wget 
+    - net-tools 
+    - traceroute 
+    - git 
+    - tcpdump 
+    - rsync 
+    - mlocate 
+    - htop 
+    - tar 
+    - zip 
+    - unzip 
+    - gnupg2
 
 ...

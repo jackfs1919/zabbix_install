@@ -1,3 +1,13 @@
 ---
 - import_playbook: playbooks/update.yml
+
+#- import_playbook: playbooks/nginx.yml
+
+#- import_playbook: playbooks/postgers.yml
+
+#- import_playbook: playbooks/zabbix.yml
+
+#- import_playbook: playbooks/php-fpm.yml
+
+#- import_playbook: playbooks/timescaledb.yml
 ...

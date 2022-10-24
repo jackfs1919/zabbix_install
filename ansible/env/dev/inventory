@@ -1,6 +1,9 @@
 [update]
 vm ansible_host=5.188.141.162  ansible_user=debian
 
+[nginx]
+vm ansible_host=5.188.141.162  ansible_user=debian
+
 [postgres]
 vm ansible_host=5.188.141.162  ansible_user=debian
 
