@@ -1,0 +1,15 @@
+[update]
+vm ansible_host=5.188.141.162  ansible_user=debian
+
+[db]
+vm ansible_host=5.188.141.162  ansible_user=debian
+
+[app]
+vm ansible_host=5.188.141.162  ansible_user=debian
+
+[front]
+vm ansible_host=5.188.141.162  ansible_user=debian
+
+[all:vars]
+  ansible_ssh_extra_args="-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+  ansible_python_interpreter=/usr/bin/python3

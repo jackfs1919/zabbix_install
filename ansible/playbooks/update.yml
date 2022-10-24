@@ -1,0 +1,12 @@
+---
+- name: update packages book
+  hosts: update
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: update role
+      include_role: 
+        name: update
+...
+
