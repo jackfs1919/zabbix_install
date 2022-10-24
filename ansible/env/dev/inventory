@@ -1,13 +1,16 @@
 [update]
 vm ansible_host=5.188.141.162  ansible_user=debian
 
-[db]
+[postgres]
 vm ansible_host=5.188.141.162  ansible_user=debian
 
-[app]
+[zabbix]
 vm ansible_host=5.188.141.162  ansible_user=debian
 
-[front]
+[php-fpm]
+vm ansible_host=5.188.141.162  ansible_user=debian
+
+[timescaledb]
 vm ansible_host=5.188.141.162  ansible_user=debian
 
 [all:vars]
