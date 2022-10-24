@@ -1,3 +1,11 @@
 ---
+- name: install php-fpm book
+  hosts: php-fpm
+  gather_facts: yes
+  become: yes
 
+  tasks:
+    - name: php-fpm role
+      include_role: 
+        name: php-fpm
 ...
