@@ -1,0 +1,34 @@
+---
+- name: download PGP-key
+  get_url:
+      url: http://nginx.org/keys/nginx_signing.key
+      dest: /etc/nginx_signing.key
+
+- name: install PGP-key
+  apt_key:
+      file: /etc/nginx_signing.key
+      state: present
+
+- name: Add Nginx Repo deb
+  apt_repository:
+    repo: deb https://nginx.org/packages/mainline/debian/ bullseye nginx
+
+- name: Add Nginx Repo deb-src
+  apt_repository:
+    repo: deb-src https://nginx.org/packages/mainline/debian/ bullseye nginx
+
+
+- name: Install Nginx
+  apt:
+    name:
+    - nginx
+    update_cache: yes
+    state: latest
+  
+  
+- name: Start Nginx and boot
+  service: 
+    name: nginx 
+    state: started 
+    enabled: yes
+...

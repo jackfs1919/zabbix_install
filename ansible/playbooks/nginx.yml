@@ -1,0 +1,11 @@
+---
+- name: install nginx book
+  hosts: nginx
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: nginx role
+      include_role: 
+        name: nginx
+...
