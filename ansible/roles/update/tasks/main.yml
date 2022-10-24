@@ -30,5 +30,8 @@
     - zip 
     - unzip 
     - gnupg2
+    - python3-psycopg2
+    - acl
+  
 
 ...

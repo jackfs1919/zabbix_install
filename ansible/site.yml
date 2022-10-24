@@ -3,7 +3,7 @@
 
 - import_playbook: playbooks/nginx.yml
 
-#- import_playbook: playbooks/postgers.yml
+- import_playbook: playbooks/postgres.yml
 
 #- import_playbook: playbooks/zabbix.yml
 

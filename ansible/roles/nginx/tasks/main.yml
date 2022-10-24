@@ -25,10 +25,7 @@
     update_cache: yes
     state: latest
   
-  
-- name: Start Nginx and boot
-  service: 
-    name: nginx 
-    state: started 
-    enabled: yes
+  notify:
+    - enable nginx
+    - start nginx  
 ...

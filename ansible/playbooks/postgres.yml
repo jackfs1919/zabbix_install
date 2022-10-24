@@ -1,0 +1,11 @@
+---
+- name: install postgres book
+  hosts: postgres
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: postgres role
+      include_role: 
+        name: postgres
+...
