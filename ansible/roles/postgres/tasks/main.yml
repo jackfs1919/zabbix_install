@@ -19,6 +19,11 @@
     - postgresql-14
     - php7.4-pgsql
     update_cache: yes
+
+- name: configure postgres
+  copy:
+    dest: /etc/postgresql/14/main/pg_hba.conf
+    src: "templates/zabbix_pg.j2"
   
   notify:
     - enable postgresql
