@@ -9,7 +9,7 @@
       file: /etc/nginx_signing.key
       state: present
 
-- name: Add Nginx Repo deb
+- name: add Nginx repo deb
   apt_repository:
     repo: deb https://nginx.org/packages/mainline/debian/ bullseye nginx
 
@@ -18,7 +18,7 @@
     repo: deb-src https://nginx.org/packages/mainline/debian/ bullseye nginx
 
 
-- name: Install Nginx
+- name: install Nginx
   apt:
     name:
     - nginx

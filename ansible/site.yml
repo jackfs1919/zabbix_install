@@ -5,7 +5,7 @@
 
 - import_playbook: playbooks/postgres.yml
 
-#- import_playbook: playbooks/zabbix.yml
+- import_playbook: playbooks/zabbix.yml
 
 - import_playbook: playbooks/php-fpm.yml
 

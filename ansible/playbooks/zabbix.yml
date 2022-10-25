@@ -1,0 +1,11 @@
+---
+- name: zabbix book
+  hosts: zabbix
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: zabbix role
+      include_role: 
+        name: zabbix
+...

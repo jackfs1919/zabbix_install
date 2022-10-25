@@ -1,0 +1,21 @@
+---
+- name: restart zabbix
+  systemd:
+    name: zabbix-server
+    state: restarted
+
+- name: start zabbix
+  systemd:
+    name: zabbix-server
+    state: started
+
+- name: stop zabbix
+  systemd:
+    name: zabbix-server
+    state: stopped
+
+- name: enable zabbix
+  systemd:
+    name: zabbix-server
+    enabled: yes
+...

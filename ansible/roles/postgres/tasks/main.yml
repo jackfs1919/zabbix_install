@@ -1,5 +1,5 @@
 ---
-- name: Add Postgers Repo
+- name: add Postgres repo
   command: |
     sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 
@@ -13,10 +13,11 @@
       file: /etc/ACCC4CF8.asc 
       state: present
 
-- name: install Postgres
+- name: install postgres
   apt:
     name:
     - postgresql-14
+    - php7.4-pgsql
     update_cache: yes
   
   notify:
