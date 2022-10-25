@@ -1,0 +1,21 @@
+---
+- name: restart php7.4-fpm
+  systemd:
+    name: php7.4-fpm
+    state: restarted
+
+- name: start php7.4-fpm
+  systemd:
+    name: php7.4-fpm
+    state: started
+
+- name: stop php7.4-fpm
+  systemd:
+    name: php7.4-fpm
+    state: stopped
+
+- name: enable php7.4-fpm
+  systemd:
+    name: php7.4-fpm
+    enabled: yes
+...
