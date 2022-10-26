@@ -78,7 +78,5 @@
   copy:
     dest: /etc/zabbix/zabbix.conf
     src: "templates/zabbix_server_conf.j2"
-
-  notify:
-    - restart zabbix    
+  
 ...
