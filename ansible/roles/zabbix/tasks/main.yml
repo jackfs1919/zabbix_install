@@ -53,13 +53,23 @@
   when: gz_in_place.stat.exists
 
 - name: fill db
-  become: true
   become_user: postgres
-  postgresql_db: 
+  postgresql_db:
     name: zabbix
     state: restore
     target: /usr/share/zabbix-sql-scripts/postgresql/server.sql
-    
+
+- name: grant all to zabbix
+  postgresql_privs:
+    db: zabbix
+    state: present
+    objs: ALL_IN_SCHEMA
+    privs: ALL
+    roles: zabbix
+    grant_option: yes
+  become_user: postgres
+
+
 - name: disable default configure
   command: mv /etc/zabbix/zabbix_server.conf /etc/zabbix/zabbix_server.conf.disabled
   failed_when: false

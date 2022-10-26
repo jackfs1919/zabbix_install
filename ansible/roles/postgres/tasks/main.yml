@@ -29,20 +29,29 @@
     - enable postgresql
     - start postgresql
 
-- name: create datatbase user
-  postgresql_user:
-    user: "zabbix"
-    password: "zabbix"
-  become: true
+- name: drop db
+  postgresql_db:
+    name: zabbix
+    state: absent
   become_user: postgres
+
+- name: create role
+  postgresql_user:
+    user: zabbix
+    password: zabbix
+    role_attr_flags: CREATEDB,NOSUPERUSER
+    state: present
+  become_user: postgres  
 
 - name: create db
   postgresql_db:
-    name: "zabbix"
+    name: zabbix
     encoding: UTF-8
-    owner: "zabbix"
+    owner: zabbix
     state: present
-  become: true
   become_user: postgres
+
+  notify:
+    - restart postgresql
   
 ...
