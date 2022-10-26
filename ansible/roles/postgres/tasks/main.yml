@@ -28,4 +28,21 @@
   notify:
     - enable postgresql
     - start postgresql
+
+- name: create datatbase user
+  postgresql_user:
+    user: "zabbix"
+    password: "zabbix"
+  become: true
+  become_user: postgres
+
+- name: create db
+  postgresql_db:
+    name: "zabbix"
+    encoding: UTF-8
+    owner: "zabbix"
+    state: present
+  become: true
+  become_user: postgres
+  
 ...

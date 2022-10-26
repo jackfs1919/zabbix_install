@@ -33,8 +33,42 @@
     autoclean: yes
     autoremove: yes
     
-  
   notify:
     - enable zabbix
     - start zabbix
+
+- name: configure zabbix.conf
+  copy:
+    dest: /etc/nginx/conf.d/zabbix.conf
+    src: "templates/zabbix_nginx.j2"
+
+- name: path to server.sql.gz
+  stat:
+      path: /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
+  register: gz_in_place
+
+- name: unpack server.sql.gz
+  command:
+    sudo gzip -d /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
+  when: gz_in_place.stat.exists
+
+- name: fill db
+  become: true
+  become_user: postgres
+  postgresql_db: 
+    name: zabbix
+    state: restore
+    target: /usr/share/zabbix-sql-scripts/postgresql/server.sql
+    
+- name: disable default configure
+  command: mv /etc/zabbix/zabbix_server.conf /etc/zabbix/zabbix_server.conf.disabled
+  failed_when: false
+
+- name: configure zabbix_server.conf
+  copy:
+    dest: /etc/zabbix/zabbix.conf
+    src: "templates/zabbix_server_conf.j2"
+
+  notify:
+    - restart zabbix    
 ...

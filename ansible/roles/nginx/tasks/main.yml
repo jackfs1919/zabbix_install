@@ -29,10 +29,6 @@
     - enable nginx
     - start nginx 
 
-- name: configure zabbix.conf
-  copy:
-    dest: /etc/nginx/conf.d/zabbix.conf
-    src: "templates/zabbix_nginx.j2"
 
 - name: disable default configure
   command: mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.disabled

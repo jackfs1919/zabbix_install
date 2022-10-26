@@ -26,12 +26,14 @@
     - rsync 
     - mlocate 
     - htop 
-    - tar 
+    - tar
+    - gzip
     - zip 
     - unzip 
     - gnupg2
     - python3-psycopg2
     - acl
+    #- python3-pip
   
 
 ...

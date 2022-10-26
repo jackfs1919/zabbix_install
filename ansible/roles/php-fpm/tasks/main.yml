@@ -5,7 +5,7 @@
     update_cache: yes 
     state: latest
 
-- name: configure php-fpm,conf
+- name: configure php-fpm.conf
   copy:
     dest: /etc/zabbix/php-fpm.conf
     src: "templates/zabbix_php-fpm.j2"
@@ -16,5 +16,6 @@
     mode: '1777'
 
   notify:
-    - restart php7.4-fpm
+    - enable php7.4-fpm
+    - start php7.4-fpm
 ...
