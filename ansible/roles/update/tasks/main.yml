@@ -33,6 +33,10 @@
     - gnupg2
     - python3-psycopg2
     - acl
+    - gnupg
+    - postgresql-common
+    - apt-transport-https
+    - lsb-release
     #- python3-pip
   
 
