@@ -1,4 +1,12 @@
 ---
+- name: timescaledb book
+  hosts: timescaledb
+  gather_facts: yes
+  become: yes
 
+  tasks:
+    - name: timescaledb role
+      include_role: 
+        name: timescaledb
 ...
 

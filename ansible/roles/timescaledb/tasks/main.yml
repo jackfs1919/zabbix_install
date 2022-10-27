@@ -1,2 +1,60 @@
 ---
+- name: download PGP-key
+  get_url:
+      url: https://packagecloud.io/timescale/timescaledb/gpgkey
+      dest: /etc/apt/trusted.gpg.d/timescaledb.gpg
+
+- name: install PGP-key
+  apt_key:
+      file: /etc/apt/trusted.gpg.d/timescaledb.gpg
+      state: present
+
+- name: add timescaledb repo deb
+  command: 
+    echo "deb https://packagecloud.io/timescale/timescaledb/debian/ $(lsb_release -c -s) main" | tee /etc/apt/sources.list.d/timescaledb.list
+
+- name: install timescaledb
+  apt:
+    name:
+    - timescaledb-2-postgresql-14
+    update_cache: yes
+    state: present
+
+- name: tuning postgersql
+  command:
+    timescaledb-tune --quiet --yes
+
+- name: another tuning postgersql
+  command: 
+    echo "shared_preload_libraries = 'timescaledb'" | tee -a /etc/postgresql/14/main/postgresql.conf
+# нужно использовать модуль ansible для добавления строк в файл    
+  
+  notify:
+    - restart postgresql
+    
+- name: isert into pg_db
+  command: 
+    echo "CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;" | psql zabbix
+# нужно использовать модуль ansible для работы с pg
+
+- name: add timescaledb to postgresql
+  become_user: postgres
+  # postgresql_db:
+  #   name: zabbix
+  #   state: restore
+  #   target: /usr/share/zabbix-sql-scripts/postgresql/timescaledb.sql
+  # по идее выше правильно, но надо почитать, пока используем command
+  command:
+    cat /usr/share/zabbix-sql-scripts/postgresql/timescaledb.sql | psql zabbix
+
+- name: grant all to zabbix
+  postgresql_privs:
+    db: zabbix
+    state: present
+    objs: ALL_IN_SCHEMA
+    privs: ALL
+    roles: zabbix
+    grant_option: yes
+  become_user: postgres
+
 ...
