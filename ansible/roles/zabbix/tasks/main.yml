@@ -49,7 +49,7 @@
 
 - name: unpack server.sql.gz
   command:
-    sudo gzip -d /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
+    gzip -d /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
   when: gz_in_place.stat.exists
 
 - name: fill db

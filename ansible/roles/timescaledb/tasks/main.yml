@@ -1,2 +1,39 @@
 ---
+- name: download PGP-key
+  get_url:
+      url: https://packagecloud.io/timescale/timescaledb/gpgkey
+      dest: /etc/apt/trusted.gpg.d/timescaledb.gpg
+
+- name: install PGP-key
+  apt_key:
+      file: /etc/nginx_signing.key
+      state: present
+
+- name: add nginx repo deb
+  apt_repository:
+    repo: deb https://nginx.org/packages/mainline/debian/ bullseye nginx
+
+- name: add nginx repo deb-src
+  apt_repository:
+    repo: deb-src https://nginx.org/packages/mainline/debian/ bullseye nginx
+
+
+- name: install nginx
+  apt:
+    name:
+    - nginx
+    update_cache: yes
+    state: latest
+  
+  notify:
+    - enable nginx
+    - start nginx 
+
+
+- name: disable default configure
+  command: mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.disabled
+  failed_when: false
+
+  notify:
+    - restart nginx     
 ...
