@@ -37,7 +37,7 @@
     - enable zabbix
     - start zabbix
 
-- name: configure zabbix.conf
+- name: configure zabbix_server.conf
   copy:
     dest: /etc/nginx/conf.d/zabbix.conf
     src: "templates/zabbix_nginx.j2"
@@ -76,7 +76,15 @@
 
 - name: configure zabbix_server.conf
   copy:
-    dest: /etc/zabbix/zabbix.conf
+    dest: /etc/zabbix/zabbix_server.conf
     src: "templates/zabbix_server_conf.j2"
+
+- name:  configure zabbix gui configure
+  copy:
+    dest: /etc/zabbix/web/zabbix.conf.php
+    src: "templates/zabbix_gui_config.j2" 
+
+  notify:
+    - restart zabbix
   
 ...

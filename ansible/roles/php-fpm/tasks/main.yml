@@ -18,9 +18,6 @@
   notify:
     - enable php7.4-fpm
     - start php7.4-fpm
+    - restart nginx
 
-- name: restart nginx
-  systemd:
-    name: nginx
-    state: restarted
 ...
